@@ -9,11 +9,11 @@ Read this file only for `STRICT_REFERENCE_ADAPTATION`: the user explicitly reque
 - If the requested output duration differs from the source, stop calling the result “1:1”. Ask which has priority: identical timing or target duration.
 - For variable-frame-rate or timing-critical footage, use frame timestamps rather than assuming constant fps.
 
-## 2. Person gate
+## 2. Faceless person gate
 
 - Inventory every person, partial person, hand, reflection, shadow, and background face.
-- Resolve whether the user authorizes a replacement performer, wants the source person preserved as a structural reference only, or requires faceless framing.
-- “无脸/不要人脸/无参考人物” excludes full faces, partial faces, reflections, screens, posters, and background faces.
+- Treat source people as structural evidence for pose, action sequence, body framing, wardrobe silhouette, and camera timing only. Do not preserve, infer, or replace facial identity or other unneeded personal appearance.
+- In every generated reference board and video-generation prompt, fully cover each possible face area with the same flat, opaque solid-color block. It must contain no facial features, skin, facial contour, facial hair, reflections, screen/poster face, or background face.
 
 ## 3. Source evidence library
 
@@ -46,7 +46,7 @@ Do not compress two sequential physical actions into one prompt phrase. Unknown 
 Create an explicit source → replacement map only in strict mode:
 
 - source product → supplied product DNA;
-- source performer → permitted performer/framing;
+- source performer → faceless pose, action, body framing, and permitted wardrobe silhouette only;
 - source setting/prop → retained or intentionally replaced equivalent;
 - source claim/dialogue → evidence-safe rewritten line;
 - source shot duration, action, camera path, and transition → target counterpart.
@@ -74,11 +74,10 @@ Compare generated output and source on aligned timestamps:
 
 - duration, shot order, boundary timing, and transition;
 - camera position, framing, lens feel, movement, and focus;
-- performer pose, gaze/face restriction, gesture, and hand contact;
+- performer pose, solid-color face masking, gesture, and hand contact;
 - product silhouette, scale, orientation, parts, branding stability, and working-surface use;
 - physical action sequence, gravity, occlusion, and result timing;
 - speech content and whether it lags/leads visible proof;
 - unwanted captions, overlays, UI, watermark, fabricated claims, and visual artifacts.
 
 Report `timestamp → observed deviation → source evidence → severity → minimal prompt correction`. Separate source-evidenced failures from aesthetic suggestions.
-

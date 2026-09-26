@@ -12,7 +12,8 @@ Generate one complete sheet for each concept with ImageGen.
 
 ## Continuity
 
-- Use the same approved performer identity/body framing throughout a concept unless its timeline explicitly introduces another person.
+- Use the same approved anonymous performer/body framing throughout a concept unless its timeline explicitly introduces another person.
+- All face areas in every panel use one consistent flat, opaque solid-color block. It fully covers the face and contains no eyes, eyebrows, nose, mouth, ears, skin, facial outline, facial hair, reflection, poster/screen face, or background face. This is a visual mask, not an in-frame text label or sticker.
 - Keep the supplied product's silhouette, proportions, color, parts, logo placement, packaging text, and scale stable.
 - Maintain the same environment geography, surface, light direction, props, wardrobe, hand state, and product state across adjacent shots unless the scripted action changes them.
 - Respect face restrictions in every panel, including reflections and background people.
@@ -20,7 +21,6 @@ Generate one complete sheet for each concept with ImageGen.
 
 ## ImageGen prompt contents
 
-Include: 3×2 grid; exact panel-to-shot mapping; product-DNA invariants; performer and face constraint; setting; first-frame composition and action state for all six panels; consistent realistic phone-video look; border-only labels; no in-frame text, caption, price, sticker, QR code, UI, lower third, or watermark; unchanged original packaging text only.
+Include: 3×2 grid; exact panel-to-shot mapping; product-DNA invariants; setting; first-frame composition and action state for all six panels; consistent realistic phone-video look; **every face area fully masked with one uniform flat opaque solid color and zero facial features**; reference people used only for pose/action/framing, never identity or facial appearance; border-only labels; no in-frame text, caption, price, sticker, QR code, UI, lower third, or watermark; unchanged original packaging text only.
 
 If ImageGen cannot guarantee precise labels, generate clean panels without in-frame labels and use Pillow only to add deterministic `Shot 1`–`Shot 6` text to gutters afterward.
-

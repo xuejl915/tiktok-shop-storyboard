@@ -22,6 +22,7 @@ Do not load `references/strict-reference.md` for ordinary creative work or a non
 - Identify the product title, 1–3 product images, reference video, target platform, target duration, and face constraints.
 - If one turn contains multiple products, images, or videos, list the exact product → image(s) → video mapping and resolve ambiguity before generation. Never mix assets between products.
 - Treat product images as appearance evidence, not automatically as the frame at 0 seconds.
+- Treat non-product reference images and reference-video frames as evidence for specific scenes, actions, camera behavior, and plot only. Do not copy or infer a person's face, identity, facial features, skin details, or other personal appearance from them.
 - For each supplied video, run `python scripts/inspect_media.py <video-path>`. Use its JSON duration, dimensions, fps, and contact sheet as evidence. Skip this step cleanly when there is no video.
 - Read [references/product-dna.md](references/product-dna.md), then record category, silhouette, proportions, colors, materials, lid/handle/port/liner and other key parts, executable actions, and prohibited errors.
 - Read [references/banned-claims-and-no-subtitles.md](references/banned-claims-and-no-subtitles.md) for every route.
@@ -37,7 +38,7 @@ Read [references/creative-15s.md](references/creative-15s.md), [references/story
 3. Use the complete timeline `0s–2s`, `2s–5s`, `5s–8s`, `8s–11s`, `11s–13s`, `13s–15s`. In every segment specify visible frame, person action, product contact, camera/shot movement, environment/SFX, and the exact spoken line at that moment.
 4. Embed spoken lines inside their matching time segments. Never add a separate voiceover-reference block. The spoken line must not announce an effect before it becomes visible.
 5. Use natural, informal Malaysian Malay TikTok speech unless the user requests another language.
-6. Use ImageGen to create one complete six-frame storyboard sheet per concept. Each sheet is a 3-column × 2-row grid whose panels are the first frames of the six timeline shots. Keep shot labels on the sheet border or gutters, outside the depicted video frames.
+6. Use ImageGen to create one complete six-frame storyboard sheet per concept. Each sheet is a 3-column × 2-row grid whose panels are the first frames of the six timeline shots. Keep shot labels on the sheet border or gutters, outside the depicted video frames. Every depicted face must be fully covered by the same flat, opaque solid-color face block, with no visible facial information.
 7. Deliver in this exact order: Concept 1 prompt → Concept 1 storyboard → Concept 2 prompt → Concept 2 storyboard → Concept 3 prompt → Concept 3 storyboard.
 8. Run `python scripts/validate_delivery.py <delivery-file>` before final delivery and resolve warnings supported by evidence.
 
@@ -58,5 +59,5 @@ Inspect both the generated video and reference video with `scripts/inspect_media
 - Never invent price, discount, sales volume, certification, brand relationship, medical or safety effect, heat-retention, leak-proofing, waterproofing, performance specifications, or any unprovided selling point.
 - Preserve contact, gravity, occlusion, and action order for liquid, food, tools, lids, buttons, liners, handles, and other parts.
 - Prevent recoloring, rescaling, melting, floating, disappearing parts, extra handles, reversed orientation, fused fingers, intersections, jumping logos, garbled packaging text, and scene drift.
-- If the user says “无脸”, “不要人脸”, or “无参考人物”, show no full face, partial face, reflected face, or background face. Use only hands, arms, below-shoulder framing, or a back view.
-
+- All generated storyboard imagery and every video-generation prompt are faceless by default: fully cover each possible face area with one consistent flat, opaque solid-color block. Do not show or infer eyes, eyebrows, nose, mouth, ears, skin texture, facial contour, facial hair, reflections, posters, screens, or background faces. The block is a visual mask, not text or a sticker. Use hands, arms, below-shoulder framing, back views, or masked head framing as needed.
+- Reference imagery/video may supply only concrete setting, action, camera, framing, and plot evidence. Preserve the supplied product's DNA, but do not reproduce any reference person's face, identity, or unneeded personal details.

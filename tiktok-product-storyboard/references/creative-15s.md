@@ -22,7 +22,7 @@ Write the accurate spoken line inside its segment. Do not add a detached voiceov
 Create three genuinely different executions. Between every pair, change at least three dimensions:
 
 - hook mechanism;
-- performer identity or visible body framing;
+- anonymous performer body framing;
 - location and production texture;
 - use context/problem;
 - primary proof action;
@@ -53,5 +53,4 @@ Deliver without a lock card or internal audit:
 5. **方案3 Seedance动态演化提示词**.
 6. **方案3 6格分镜图**.
 
-At the start of each prompt state: `15秒，9:16，真实手机拍摄TikTok质感，无屏幕字幕/标题/价格/促销/UI/水印，包装原有文字保持不变且不新增。` Then state the specific face constraint and product-DNA invariants.
-
+At the start of each prompt state: `15秒，9:16，真实手机拍摄TikTok质感，无屏幕字幕/标题/价格/促销/UI/水印，包装原有文字保持不变且不新增。所有人物脸部区域统一使用同一种纯色、不透明遮挡块完全覆盖；无五官、皮肤、反射脸、背景脸或身份特征。` Then state product-DNA invariants. Reference imagery may guide only the concrete scene, action, camera/framing, and plot; never copy a person's face or personal appearance.

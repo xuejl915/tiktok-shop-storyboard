@@ -31,6 +31,8 @@ Append the following meaning to every generation prompt, adapted to the user's l
 
 `No in-video subtitles, captions, auto-captions, narration text, titles, prices, discounts, sales claims, promotional stickers, QR codes, floating text, lower thirds, UI, or watermarks. Keep only unchanged text physically printed on the supplied packaging. No invented claims or specifications. Preserve product color, geometry, scale, parts, logo placement, contact physics, gravity, occlusion, and action order. No recoloring, resizing, melting, floating, missing/extra parts, reversed orientation, fused fingers, intersections, jumping logos, garbled package text, or scene drift.`
 
-For faceless requests add:
+## Universal faceless visual constraint
 
-`No full or partial face, reflected face, screen/poster face, or background face; show only hands, arms, below-shoulder framing, or back view.`
+Append the following meaning to every storyboard and video-generation prompt:
+
+`Every face area is completely covered by the same flat, opaque solid-color visual mask. Show no eyes, eyebrows, nose, mouth, ears, skin detail, facial contour, facial hair, reflected face, screen/poster face, or background face. The mask is not text, a caption, or a sticker. Reference people may guide only pose, scene, action, framing, and plot; never copy identity, face, or unneeded personal details.`
