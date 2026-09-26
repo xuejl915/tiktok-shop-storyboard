@@ -1,6 +1,0 @@
-interface:
-  display_name: "TikTok Product Storyboard"
-  short_description: "Create Malaysian TikTok scripts and storyboards"
-  default_prompt: "Use $tiktok-product-storyboard to turn my product title, images, and reference video into three distinct 15-second Malaysian Malay Seedance prompts with six-shot storyboard sheets."
-policy:
-  allow_implicit_invocation: true

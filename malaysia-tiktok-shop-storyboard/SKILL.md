@@ -1,9 +1,9 @@
 ---
-name: tiktok-product-storyboard
-description: Create Malaysian TikTok, Reels, or Shorts product-selling video packages from a product title, 1–3 product images, and an optional reference video. Use for Seedance prompts; three 15-second evolving concepts with different scenes, plots, and people; six-frame storyboards or first-frame sheets; reference-video reverse engineering; strict 1:1 shot replication or replacement; and generated-video audits. Trigger on requests mentioning 商品图、产品标题、参考视频、TikTok 带货、三套不同场景/剧情/人物、15秒动态演化提示词、分镜图、Storyboards、首帧图、严格1:1、逐镜复刻、完全反推、严格替换或成片审计.
+name: malaysia-tiktok-shop-storyboard
+description: Create Malaysian TikTok Shop, Reels, or Shorts product-selling video packages from a product title, 1–3 product images, and an optional reference video. Use for Seedance prompts; three distinct 15-second concepts; six-frame storyboards; reference-video adaptation; strict shot replication or replacement; and generated-video audits. Trigger on requests mentioning 商品图、产品标题、参考视频、TikTok Shop、TikTok 带货、马来西亚、三套不同场景/剧情、15秒动态演化提示词、分镜图、storyboard、首帧图、逐镜复刻、严格替换或成片审计.
 ---
 
-# TikTok Product Storyboard
+# Malaysia TikTok Shop Storyboard
 
 Turn product evidence into executable 9:16 video prompts and visual storyboards without inventing product facts.
 
