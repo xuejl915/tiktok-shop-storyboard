@@ -31,8 +31,8 @@ Append the following meaning to every generation prompt, adapted to the user's l
 
 `No in-video subtitles, captions, auto-captions, narration text, titles, prices, discounts, sales claims, promotional stickers, QR codes, floating text, lower thirds, UI, or watermarks. Keep only unchanged text physically printed on the supplied packaging. No invented claims or specifications. Preserve product color, geometry, scale, parts, logo placement, contact physics, gravity, occlusion, and action order. No recoloring, resizing, melting, floating, missing/extra parts, reversed orientation, fused fingers, intersections, jumping logos, garbled package text, or scene drift.`
 
-## Universal faceless visual constraint
+## Performer privacy without censor artifacts
 
 Append the following meaning to every storyboard and video-generation prompt:
 
-`Every face area is completely covered by the same flat, opaque solid-color visual mask. Show no eyes, eyebrows, nose, mouth, ears, skin detail, facial contour, facial hair, reflected face, screen/poster face, or background face. The mask is not text, a caption, or a sticker. Reference people may guide only pose, scene, action, framing, and plot; never copy identity, face, or unneeded personal details.`
+`Protect identity through composition, not face covering. By default use hands-only, below-shoulder framing, back views, or natural occlusion so faces remain outside the frame. Do not add mosaics, pixelation, face blur, censor bars, solid-color blocks, stickers, or artificial masks to storyboard references or generated video. If visible faces are explicitly permitted, use a newly generated anonymous performer with a natural unobscured face; never copy a reference person's identity or facial appearance. Reference people may guide only pose, scene, action, framing, and plot.`

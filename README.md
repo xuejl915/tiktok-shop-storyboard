@@ -12,7 +12,7 @@ A Codex Skill for turning product evidence into production-ready Malaysian TikTo
 - Preserves product shape, color, parts, packaging, scale, and physical interactions.
 - Supports strict reference-video adaptation when the user explicitly requests shot-by-shot replication.
 - Audits generated videos and returns timestamped prompt corrections.
-- Keeps generated people faceless with consistent opaque face masking.
+- Protects performer identity through hands-only, below-shoulder, back-view, or naturally occluded composition—never through mosaics, blur, censor blocks, stickers, or artificial face masks that could leak into generated video.
 - Rejects invented prices, discounts, certifications, performance claims, subtitles, UI, and watermarks.
 
 ## Install with Codex / 使用 Codex 安装

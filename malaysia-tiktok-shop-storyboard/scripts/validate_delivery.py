@@ -33,6 +33,12 @@ BANNED_TERMS = [
     "字幕", "caption", "auto-caption", "auto caption", "价格", "price", "discount", "sale",
     "折扣", "销量", "促销贴纸", "二维码", "qr code", "watermark", "水印", "guaranteed", "certified",
 ]
+CENSOR_ARTIFACT_TERMS = [
+    "打码", "马赛克", "像素化", "模糊脸", "脸部模糊", "纯色遮挡", "遮挡块", "面部遮罩",
+    "face mask", "masked face", "mosaic", "pixelation", "pixelated face", "blurred face",
+    "censor bar", "censor block", "solid-color face block",
+]
+CLAUSE_BOUNDARY_RE = re.compile(r"[。！？；;.!?]")
 
 
 def configure_utf8_streams() -> None:
@@ -97,6 +103,44 @@ def banned_hits(text: str) -> list[dict[str, Any]]:
     return hits
 
 
+def censor_artifact_hits(text: str) -> list[dict[str, Any]]:
+    hits: list[dict[str, Any]] = []
+    for line_number, line in enumerate(text.splitlines(), start=1):
+        lowered = line.casefold()
+        found: set[str] = set()
+        for term in CENSOR_ARTIFACT_TERMS:
+            normalized_term = term.casefold()
+            start = 0
+            while True:
+                index = lowered.find(normalized_term, start)
+                if index < 0:
+                    break
+                clause_prefix = CLAUSE_BOUNDARY_RE.split(line[:index])[-1]
+                if not NEGATION_RE.search(clause_prefix):
+                    found.add(term)
+                start = index + len(normalized_term)
+        if found:
+            hits.append({"line": line_number, "terms": sorted(found), "excerpt": line.strip()[:180]})
+    return hits
+
+
+def has_no_censor_artifact_constraint(text: str) -> bool:
+    for line in text.splitlines():
+        lowered = line.casefold()
+        for term in CENSOR_ARTIFACT_TERMS:
+            normalized_term = term.casefold()
+            start = 0
+            while True:
+                index = lowered.find(normalized_term, start)
+                if index < 0:
+                    break
+                clause_prefix = CLAUSE_BOUNDARY_RE.split(line[:index])[-1]
+                if NEGATION_RE.search(clause_prefix):
+                    return True
+                start = index + len(normalized_term)
+    return False
+
+
 def main() -> int:
     configure_utf8_streams()
     parser = argparse.ArgumentParser(description=__doc__)
@@ -120,6 +164,8 @@ def main() -> int:
         warnings = timeline_warnings(intervals)
         if not NO_OVERLAY_RE.search(block):
             warnings.append("Missing an explicit no-on-screen-subtitles constraint in this script.")
+        if not has_no_censor_artifact_constraint(block):
+            warnings.append("Missing an explicit no-face-censor-artifacts constraint in this script.")
         scripts.append({
             "name": name,
             "status": "通过" if not warnings else "警告",
@@ -133,6 +179,9 @@ def main() -> int:
     hits = banned_hits(text)
     if hits:
         global_warnings.append("Potentially prohibited terms appear outside an explicit negative constraint.")
+    censor_hits = censor_artifact_hits(text)
+    if censor_hits:
+        global_warnings.append("A face-censor artifact may be requested instead of explicitly prohibited.")
     passed = not global_warnings and all(item["status_code"] == "PASS" for item in scripts)
     result = {
         "status": "通过" if passed else "警告",
@@ -141,6 +190,7 @@ def main() -> int:
         "scripts": scripts,
         "global_warnings": global_warnings,
         "banned_term_hits": hits,
+        "censor_artifact_hits": censor_hits,
     }
     print(json.dumps(result, ensure_ascii=False, indent=2))
     return 0 if passed else 1

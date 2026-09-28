@@ -53,4 +53,4 @@ Deliver without a lock card or internal audit:
 5. **方案3 Seedance动态演化提示词**.
 6. **方案3 6格分镜图**.
 
-At the start of each prompt state: `15秒，9:16，真实手机拍摄TikTok质感，无屏幕字幕/标题/价格/促销/UI/水印，包装原有文字保持不变且不新增。所有人物脸部区域统一使用同一种纯色、不透明遮挡块完全覆盖；无五官、皮肤、反射脸、背景脸或身份特征。` Then state product-DNA invariants. Reference imagery may guide only the concrete scene, action, camera/framing, and plot; never copy a person's face or personal appearance.
+At the start of each prompt state: `15秒，9:16，真实手机拍摄TikTok质感，无屏幕字幕/标题/价格/促销/UI/水印，包装原有文字保持不变且不新增。人物默认采用手部、肩部以下、背影或自然遮挡构图，让脸部处于画面外；不得出现打码、马赛克、像素化、模糊脸、纯色遮挡块、贴纸或人工面部遮罩。若用户明确允许露脸，使用新生成的匿名人物自然露脸，不复制参考人物身份或面部外观。` Then state product-DNA invariants. Reference imagery may guide only the concrete scene, action, camera/framing, and plot; never copy a person's face or personal appearance.
