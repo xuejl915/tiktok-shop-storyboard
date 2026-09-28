@@ -103,14 +103,13 @@ The Skill treats product images as the source of truth and does not invent unpro
 
 ## Output / 默认输出
 
-For ordinary creative requests, the Skill returns results in this order:
+For ordinary creative requests, the Skill returns three prompt-and-image pairs directly in chat. It does not create a Markdown delivery file:
 
-1. Concept 1 Seedance prompt
-2. Concept 1 six-frame storyboard
-3. Concept 2 Seedance prompt
-4. Concept 2 six-frame storyboard
-5. Concept 3 Seedance prompt
-6. Concept 3 six-frame storyboard
+1. Concept 1: one copyable plain-text Seedance prompt block, then its six-frame reference image.
+2. Concept 2: one copyable plain-text Seedance prompt block, then its six-frame reference image.
+3. Concept 3: one copyable plain-text Seedance prompt block, then its six-frame reference image.
+
+Storyboard-generation instructions stay internal and are never mixed into the video-evolution prompt or shown as another copy block.
 
 Each 15-second concept uses the timeline `0–2s`, `2–5s`, `5–8s`, `8–11s`, `11–13s`, and `13–15s`.
 

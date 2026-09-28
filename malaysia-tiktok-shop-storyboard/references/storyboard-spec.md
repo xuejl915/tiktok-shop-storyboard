@@ -2,6 +2,8 @@
 
 Generate one complete sheet for each concept with ImageGen.
 
+This specification applies only to the internal ImageGen prompt. Never paste these layout, labeling, identity, or reference-board instructions into the user-facing video-evolution prompt. The final response shows the resulting image, not this internal prompt.
+
 ## Layout
 
 - Exactly 6 panels in a 3-column × 2-row grid.

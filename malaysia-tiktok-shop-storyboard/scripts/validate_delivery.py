@@ -124,23 +124,6 @@ def censor_artifact_hits(text: str) -> list[dict[str, Any]]:
     return hits
 
 
-def has_no_censor_artifact_constraint(text: str) -> bool:
-    for line in text.splitlines():
-        lowered = line.casefold()
-        for term in CENSOR_ARTIFACT_TERMS:
-            normalized_term = term.casefold()
-            start = 0
-            while True:
-                index = lowered.find(normalized_term, start)
-                if index < 0:
-                    break
-                clause_prefix = CLAUSE_BOUNDARY_RE.split(line[:index])[-1]
-                if NEGATION_RE.search(clause_prefix):
-                    return True
-                start = index + len(normalized_term)
-    return False
-
-
 def main() -> int:
     configure_utf8_streams()
     parser = argparse.ArgumentParser(description=__doc__)
@@ -164,8 +147,6 @@ def main() -> int:
         warnings = timeline_warnings(intervals)
         if not NO_OVERLAY_RE.search(block):
             warnings.append("Missing an explicit no-on-screen-subtitles constraint in this script.")
-        if not has_no_censor_artifact_constraint(block):
-            warnings.append("Missing an explicit no-face-censor-artifacts constraint in this script.")
         scripts.append({
             "name": name,
             "status": "通过" if not warnings else "警告",
