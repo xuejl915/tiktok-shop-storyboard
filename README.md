@@ -22,9 +22,9 @@ Copy the following prompt into Codex:
 ```text
 请使用内置的 $skill-installer 安装下面这个 GitHub Skill：
 
-https://github.com/xuejl915/masxue/tree/main/malaysia-tiktok-shop-storyboard
+https://github.com/xuejl915/tiktok-shop-storyboard/tree/main/malaysia-tiktok-shop-storyboard
 
-仓库是 xuejl915/masxue，Skill 路径是 malaysia-tiktok-shop-storyboard。
+仓库是 xuejl915/tiktok-shop-storyboard，Skill 路径是 malaysia-tiktok-shop-storyboard。
 请安装完整目录，包括 SKILL.md、agents、references 和 scripts，不能只下载 SKILL.md。
 安装到默认的 $CODEX_HOME/skills 目录。如果已经存在同名 Skill，不要直接覆盖，先告诉我。
 安装完成后报告实际安装路径，并提醒我从下一条消息开始使用 $malaysia-tiktok-shop-storyboard。
@@ -35,7 +35,7 @@ English installation prompt:
 ```text
 Use the built-in $skill-installer to install this GitHub Skill:
 
-https://github.com/xuejl915/masxue/tree/main/malaysia-tiktok-shop-storyboard
+https://github.com/xuejl915/tiktok-shop-storyboard/tree/main/malaysia-tiktok-shop-storyboard
 
 Install the complete malaysia-tiktok-shop-storyboard directory, including SKILL.md, agents, references, and scripts, into the default $CODEX_HOME/skills directory. Do not overwrite an existing skill without asking me first. After installation, report the installed path and remind me that the skill will be available as $malaysia-tiktok-shop-storyboard on my next message.
 ```
