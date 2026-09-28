@@ -14,6 +14,9 @@ This specification applies only to the internal ImageGen prompt. Never paste the
 
 ## Continuity
 
+- Make the product, its setup or operation, and the visible result the subject of every panel. Include a person only when a hand, body position, or reaction is necessary to explain the action; never add people merely to fill empty space.
+- Prefer product close-ups, hands, partial-body operation, component connections, working surfaces, and completed-use details over portrait framing.
+- Build a product-appropriate six-panel functional chain: problem/context → product entry → setup/opening → primary operation → real use → completed result. For assembly or storage products, adapt this to the evidenced steps; for a shoe rack this can be problem → unfold → assemble → stabilize → place shoes → completed organized result. Do not force shoe-rack actions onto unrelated products.
 - Use the same approved anonymous performer/body framing throughout a concept unless its timeline explicitly introduces another person.
 - Protect identity through composition: hands-only, below-shoulder framing, back views, or natural occlusion with the face outside the frame. Never repair a visible face by drawing over it; reframe or regenerate the panel instead.
 - Storyboards that may become video references must contain no mosaics, pixelation, face blur, censor bars, solid-color face blocks, stickers, or artificial masks because video models can reproduce them. If the user explicitly permits visible faces, use a newly generated anonymous performer with a natural unobscured face, never the reference person's identity or facial appearance.
@@ -24,6 +27,6 @@ This specification applies only to the internal ImageGen prompt. Never paste the
 
 ## ImageGen prompt contents
 
-Include: 3×2 grid; exact panel-to-shot mapping; product-DNA invariants; setting; first-frame composition and action state for all six panels; consistent realistic phone-video look; identity-safe composition with faces outside the frame by default; **no mosaic, pixelation, face blur, censor bar, solid-color face block, sticker, or artificial mask**; reference people used only for pose/action/framing, never identity or facial appearance; border-only labels; no in-frame text, caption, price, sticker, QR code, UI, lower third, or watermark; unchanged original packaging text only.
+Include: 3×2 grid; exact panel-to-shot mapping; product-DNA invariants; product-first functional sequence; setting; first-frame composition and action state for all six panels; people only where required by the action; consistent realistic phone-video look; identity-safe composition with faces outside the frame by default; **no mosaic, pixelation, face blur, censor bar, solid-color face block, sticker, or artificial mask**; reference people used only for pose/action/framing, never identity or facial appearance; border-only labels; no in-frame text, caption, price, sticker, QR code, UI, lower third, or watermark; unchanged original packaging text only.
 
 If ImageGen cannot guarantee precise labels, generate clean panels without in-frame labels and use Pillow only to add deterministic `Shot 1`–`Shot 6` text to gutters afterward.

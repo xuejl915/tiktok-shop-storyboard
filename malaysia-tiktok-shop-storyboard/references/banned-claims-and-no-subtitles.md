@@ -25,9 +25,9 @@ Unless the user provides verifiable evidence and explicitly asks to use it, do n
 
 Show an evidenced action instead of upgrading it into a broader claim. Speech cannot announce a benefit before the relevant result is visible.
 
-## Shared video constraint
+## Internal video checks
 
-Enforce the following meaning in every video prompt, adapted concisely to the user's language. Keep it integrated with the executable prompt; do not dump the full policy as a separate checklist:
+Use the following as an internal authoring and validation checklist. Do not paste it, paraphrase it, or add its negative/meta instructions to the user-facing video prompt. The delivered prompt contains only intended on-screen action, camera, sound, speech, product invariants, and continuity:
 
 `No in-video subtitles, captions, auto-captions, narration text, titles, prices, discounts, sales claims, promotional stickers, QR codes, floating text, lower thirds, UI, or watermarks. Keep only unchanged text physically printed on the supplied packaging. No invented claims or specifications. Preserve product color, geometry, scale, parts, logo placement, contact physics, gravity, occlusion, and action order. No recoloring, resizing, melting, floating, missing/extra parts, reversed orientation, fused fingers, intersections, jumping logos, garbled package text, or scene drift.`
 
@@ -37,4 +37,4 @@ Apply the following when building the internal storyboard prompt. Do not copy th
 
 `Protect identity through composition, not face covering. By default use hands-only, below-shoulder framing, back views, or natural occlusion so faces remain outside the frame. Do not add mosaics, pixelation, face blur, censor bars, solid-color blocks, stickers, or artificial masks to storyboard references. If visible faces are explicitly permitted, use a newly generated anonymous performer with a natural unobscured face; never copy a reference person's identity or facial appearance. Reference people may guide only pose, scene, action, framing, and plot.`
 
-For the delivered video prompt, simply describe the intended performer, action, and camera framing. If the user requests a faceless video, use positive shot directions such as hands-only or below-shoulder framing. Do not mention masking, mosaics, blur, censoring, face blocks, or the storyboard privacy process.
+For the delivered video prompt, simply describe the intended performer, action, and camera framing. Do not mention face avoidance, masking, mosaics, blur, censoring, face blocks, text handling, captions, watermarks, UI removal, or the storyboard privacy process. Keep those decisions internal to storyboard generation and final validation.

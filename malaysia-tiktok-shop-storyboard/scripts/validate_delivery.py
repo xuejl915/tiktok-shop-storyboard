@@ -18,12 +18,6 @@ INTERVAL_RE = re.compile(
 HEADING_RE = re.compile(
     r"(?im)^[ \t]{0,3}(?:#{1,6}[ \t]*)?(?:方案|概念|concept|option)[ \t]*[-_:#：]*[ \t]*([123](?!\d)|one\b|two\b|three\b).*$"
 )
-NO_OVERLAY_RE = re.compile(
-    r"无(?:屏幕|视频内|新增)?字幕|不要字幕|禁止.*字幕|不得.*字幕|不显示.*字幕|"
-    r"no\s+(?:on[- ]screen\s+)?(?:subtitles?|captions?)|without\s+(?:subtitles?|captions?)|"
-    r"do\s+not\s+(?:add|show|use).*(?:subtitles?|captions?)",
-    re.IGNORECASE,
-)
 NEGATION_RE = re.compile(
     r"无|禁止|不得|不要|不显示|不添加|严禁|避免|移除|no\b|without\b|never\b|"
     r"do\s+not\b|don't\b|must\s+not\b|forbid",
@@ -37,6 +31,13 @@ CENSOR_ARTIFACT_TERMS = [
     "打码", "马赛克", "像素化", "模糊脸", "脸部模糊", "纯色遮挡", "遮挡块", "面部遮罩",
     "face mask", "masked face", "mosaic", "pixelation", "pixelated face", "blurred face",
     "censor bar", "censor block", "solid-color face block",
+]
+FORBIDDEN_VIDEO_META_TERMS = [
+    "字幕", "屏幕文字", "新增文字", "改写任何文字", "文字处理", "水印", "促销UI", "界面元素",
+    "打码", "马赛克", "像素化", "模糊脸", "脸部模糊", "纯色遮挡", "遮挡块", "面部遮罩",
+    "避脸", "头部与脸部", "身份特征", "subtitles", "captions", "on-screen text", "watermark",
+    "face mask", "masked face", "mosaic", "pixelation", "blurred face", "censor bar", "censor block",
+    "do not add text", "no text",
 ]
 CLAUSE_BOUNDARY_RE = re.compile(r"[。！？；;.!?]")
 
@@ -124,10 +125,20 @@ def censor_artifact_hits(text: str) -> list[dict[str, Any]]:
     return hits
 
 
+def forbidden_video_meta_hits(text: str) -> list[dict[str, Any]]:
+    hits: list[dict[str, Any]] = []
+    for line_number, line in enumerate(text.splitlines(), start=1):
+        lowered = line.casefold()
+        found = sorted({term for term in FORBIDDEN_VIDEO_META_TERMS if term.casefold() in lowered})
+        if found:
+            hits.append({"line": line_number, "terms": found, "excerpt": line.strip()[:180]})
+    return hits
+
+
 def main() -> int:
     configure_utf8_streams()
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("delivery", nargs="?", help="UTF-8 delivery text/Markdown file; omit or use - for stdin")
+    parser.add_argument("delivery", nargs="?", help="UTF-8 user-facing prompt text file; omit or use - for stdin")
     args = parser.parse_args()
     try:
         if not args.delivery or args.delivery == "-":
@@ -145,8 +156,6 @@ def main() -> int:
     for name, block in split_scripts(text):
         intervals = intervals_for(block)
         warnings = timeline_warnings(intervals)
-        if not NO_OVERLAY_RE.search(block):
-            warnings.append("Missing an explicit no-on-screen-subtitles constraint in this script.")
         scripts.append({
             "name": name,
             "status": "通过" if not warnings else "警告",
@@ -163,6 +172,9 @@ def main() -> int:
     censor_hits = censor_artifact_hits(text)
     if censor_hits:
         global_warnings.append("A face-censor artifact may be requested instead of explicitly prohibited.")
+    meta_hits = forbidden_video_meta_hits(text)
+    if meta_hits:
+        global_warnings.append("Production or policy meta-instructions appear in the user-facing video prompt.")
     passed = not global_warnings and all(item["status_code"] == "PASS" for item in scripts)
     result = {
         "status": "通过" if passed else "警告",
@@ -172,6 +184,7 @@ def main() -> int:
         "global_warnings": global_warnings,
         "banned_term_hits": hits,
         "censor_artifact_hits": censor_hits,
+        "forbidden_video_meta_hits": meta_hits,
     }
     print(json.dumps(result, ensure_ascii=False, indent=2))
     return 0 if passed else 1

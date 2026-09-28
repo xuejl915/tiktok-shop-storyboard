@@ -46,17 +46,17 @@ Changing only props, wardrobe color, or a synonym in the dialogue does not count
 
 Build two artifacts per concept:
 
-1. **User-facing video-evolution prompt** — one complete plain-text Seedance prompt containing the global video format, verified product invariants, and all six timed segments. It must stand alone when copied. Do not include grid instructions, panel labels, storyboard terminology, first-frame-sheet instructions, ImageGen directions, or any face-masking/anti-masking policy language.
+1. **User-facing video-evolution prompt** — one complete plain-text Seedance prompt containing only the 15-second 9:16 format, verified product invariants, six timed segments, visible content, product operation, camera movement, scene sound, matching Malay speech, and physical continuity. It must stand alone when copied. Do not include grid instructions, panel labels, storyboard terminology, first-frame-sheet instructions, ImageGen directions, workflow notes, product-DNA analysis, validation records, file lists, or any face/text/masking production-policy language.
 2. **Internal storyboard prompt** — the ImageGen-only instructions needed to render the six first frames. Keep it internal and follow `references/storyboard-spec.md`. Never paste it into the video prompt or final text copy block.
 
-If the user requests a faceless video, express that only through positive camera composition inside the relevant timed segments, such as hands-only close-up, below-shoulder framing, or back view. Do not add a global paragraph about faces, masking, mosaics, blur, blocks, stickers, or identity.
+Performer privacy and text-handling decisions belong to the internal storyboard prompt and validation process. Do not add a global or per-shot paragraph about avoiding faces, keeping heads out of frame, masking, mosaics, blur, blocks, stickers, captions, text changes, UI, or watermarks to the user-facing video prompt.
 
 ## Complete delivery format
 
 Deliver directly in chat without a `.md` attachment, lock card, internal audit, or exposed storyboard prompt:
 
-1. `方案1` label, then one `text` code block containing only the complete Seedance video-evolution prompt, then the corresponding generated six-frame reference image.
-2. `方案2` label, then one `text` code block, then its reference image.
-3. `方案3` label, then one `text` code block, then its reference image.
+1. Exact label `方案1｜可复制视频提示词`, then one `text` code block containing only the complete Seedance video-evolution prompt, then the corresponding generated six-frame reference image.
+2. Exact label `方案2｜可复制视频提示词`, then one `text` code block, then its reference image.
+3. Exact label `方案3｜可复制视频提示词`, then one `text` code block, then its reference image.
 
-Start the video prompt concisely with: `15秒，9:16，真实手机拍摄TikTok质感，无屏幕字幕、价格、促销UI或水印。` Then state only the verified product invariants needed for visual consistency and the six timed segments. Do not append a face-policy paragraph. Reference imagery may guide concrete scene, action, camera/framing, and plot, but never a person's identity or facial appearance.
+Start the video prompt concisely with: `15秒，9:16，真实手机拍摄TikTok质感。` Then state only the verified product invariants needed for visual consistency and the six timed segments. Do not append any face, masking, subtitle, text, UI, watermark, validation, or workflow instruction. Reference imagery may guide concrete scene, action, camera/framing, and plot, but never a person's identity or facial appearance.
