@@ -2,7 +2,7 @@
 
 Generate one complete sheet for each concept with ImageGen.
 
-This specification applies only to the internal ImageGen prompt. Never paste these layout, labeling, identity, or reference-board instructions into the user-facing video-evolution prompt. The final response shows the resulting image, not this internal prompt.
+This specification applies only to the internal ImageGen prompt. Never paste or paraphrase these layout, labeling, identity, packaging-text, or reference-board instructions into the user-facing video-evolution prompt. In particular, `3×2`, `Shot 1–6`, storyboard/first-frame language, face handling, reflections/background-face checks, masking vocabulary, and ImageGen directions must never appear in the copyable video prompt. The final response shows the resulting image, not this internal prompt.
 
 ## Layout
 

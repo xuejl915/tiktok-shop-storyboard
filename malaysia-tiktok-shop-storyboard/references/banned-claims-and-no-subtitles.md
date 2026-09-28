@@ -27,9 +27,16 @@ Show an evidenced action instead of upgrading it into a broader claim. Speech ca
 
 ## Internal video checks
 
-Use the following as an internal authoring and validation checklist. Do not paste it, paraphrase it, or add its negative/meta instructions to the user-facing video prompt. The delivered prompt contains only intended on-screen action, camera, sound, speech, product invariants, and continuity:
+Inspect the draft internally in four categories: unsupported claims, unwanted overlays, product/part continuity, and contact/action continuity. These are audit categories, not prompt copy. Do not paste or paraphrase their names, examples, or failure vocabulary into the user-facing video prompt.
 
-`No in-video subtitles, captions, auto-captions, narration text, titles, prices, discounts, sales claims, promotional stickers, QR codes, floating text, lower thirds, UI, or watermarks. Keep only unchanged text physically printed on the supplied packaging. No invented claims or specifications. Preserve product color, geometry, scale, parts, logo placement, contact physics, gravity, occlusion, and action order. No recoloring, resizing, melting, floating, missing/extra parts, reversed orientation, fused fingers, intersections, jumping logos, garbled package text, or scene drift.`
+When a check finds a relevant risk:
+
+1. Rewrite it first as the intended visible state at the affected moment.
+2. Keep the wording concrete and product-specific.
+3. Use a negative constraint only if that exact shot still has a high-probability failure that would break the concept.
+4. Keep such a constraint beside that shot; never accumulate a global negative-prompt list.
+
+For example, preserve a pistachio filling with `馅料始终保持参考图中的统一开心果绿色形态`, not a list mentioning white strands, cheese, cream, or other unwanted alternatives. Internal checks must not introduce new visual concepts into the generation prompt.
 
 ## Storyboard-only performer privacy
 

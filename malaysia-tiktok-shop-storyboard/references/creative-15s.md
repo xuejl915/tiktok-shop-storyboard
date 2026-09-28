@@ -51,6 +51,19 @@ Build two artifacts per concept:
 
 Performer privacy and text-handling decisions belong to the internal storyboard prompt and validation process. Do not add a global or per-shot paragraph about avoiding faces, keeping heads out of frame, masking, mosaics, blur, blocks, stickers, captions, text changes, UI, or watermarks to the user-facing video prompt.
 
+## Positive state locks and risk-filtered constraints
+
+Build the video prompt from intended visible states, not from a catalogue of possible failures.
+
+- Prefer a positive state lock: `掰开后馅料始终保持参考图中统一的开心果绿色、稠密顺滑形态。`
+- Do not seed unwanted alternatives by writing `不要白丝、不要芝士丝、不要奶油` or similar lists.
+- Keep continuity positive where possible: `前后镜头保持同一颗曲奇。`
+- A narrow negative constraint is allowed only when the risk is specific to the current shot, its occurrence would break the proof, and positive wording alone is insufficient. Example: `0s–5s 曲奇保持完整，掰开前不得提前露馅。`
+- Use zero negative constraints by default and at most two per concept. Put each constraint in the affected time segment, not in a global negative-prompt block.
+- Never import generic internal-check terms such as prices, discounts, QR codes, UI, missing parts, reversed motion, floating objects, cream, cheese, or censor artifacts unless the exact shot genuinely contains that evidenced risk. Even then, first rewrite the requirement as the desired visible state.
+
+Before delivery, apply this gate to every sentence: if it describes the 3×2 sheet, Shot labels, ImageGen, face/privacy handling, packaging-text policy, validation, or a hypothetical defect rather than the intended finished video, remove it from the video prompt and keep it only in its proper internal layer.
+
 ## Complete delivery format
 
 Deliver directly in chat without a `.md` attachment, lock card, internal audit, or exposed storyboard prompt:

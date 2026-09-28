@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate creative-delivery timelines and global no-overlay constraints."""
+"""Validate creative timelines, layer separation, and prompt quality."""
 
 from __future__ import annotations
 
@@ -39,11 +39,22 @@ FORBIDDEN_VIDEO_META_TERMS = [
     "face mask", "masked face", "mosaic", "pixelation", "blurred face", "censor bar", "censor block",
     "do not add text", "no text",
 ]
+STORYBOARD_LEAK_TERMS = [
+    "3×2", "3x2", "六格分镜", "分镜图", "分镜生成", "storyboard", "first-frame sheet",
+    "首帧图", "参考图生成规范", "imagegen", "shot 1", "shot 2", "shot 3", "shot 4",
+    "shot 5", "shot 6", "反射脸", "背景脸", "纯色遮脸块",
+]
+GENERIC_FAILURE_TERMS = [
+    "价格", "折扣", "二维码", "ui", "缺件", "多余部件", "反向", "漂浮", "融化",
+    "白丝", "芝士", "奶油", "水印", "字幕", "打码", "马赛克", "像素化", "模糊脸",
+    "遮挡块", "贴纸", "price", "discount", "qr code", "missing part", "extra part",
+    "reversed", "floating", "cream", "cheese", "watermark", "caption", "mosaic",
+]
 CLAUSE_BOUNDARY_RE = re.compile(r"[。！？；;.!?]")
 
 
 def configure_utf8_streams() -> None:
-    for stream in (sys.stdout, sys.stderr):
+    for stream in (sys.stdin, sys.stdout, sys.stderr):
         if hasattr(stream, "reconfigure"):
             stream.reconfigure(encoding="utf-8", errors="replace")
 
@@ -135,6 +146,34 @@ def forbidden_video_meta_hits(text: str) -> list[dict[str, Any]]:
     return hits
 
 
+def storyboard_leak_hits(text: str) -> list[dict[str, Any]]:
+    hits: list[dict[str, Any]] = []
+    for line_number, line in enumerate(text.splitlines(), start=1):
+        lowered = line.casefold()
+        found = sorted({term for term in STORYBOARD_LEAK_TERMS if term.casefold() in lowered})
+        if found:
+            hits.append({"line": line_number, "terms": found, "excerpt": line.strip()[:180]})
+    return hits
+
+
+def dense_negative_constraint_hits(text: str) -> list[dict[str, Any]]:
+    hits: list[dict[str, Any]] = []
+    for line_number, line in enumerate(text.splitlines(), start=1):
+        for clause in filter(None, (part.strip() for part in CLAUSE_BOUNDARY_RE.split(line))):
+            lowered = clause.casefold()
+            found = sorted({term for term in GENERIC_FAILURE_TERMS if term.casefold() in lowered})
+            negations = len(NEGATION_RE.findall(clause))
+            list_items = len(re.split(r"[、,，]", clause))
+            if len(found) >= 3 or negations >= 3 or (found and negations and list_items >= 4):
+                hits.append({
+                    "line": line_number,
+                    "terms": found,
+                    "negation_count": negations,
+                    "excerpt": clause[:180],
+                })
+    return hits
+
+
 def main() -> int:
     configure_utf8_streams()
     parser = argparse.ArgumentParser(description=__doc__)
@@ -175,6 +214,12 @@ def main() -> int:
     meta_hits = forbidden_video_meta_hits(text)
     if meta_hits:
         global_warnings.append("Production or policy meta-instructions appear in the user-facing video prompt.")
+    storyboard_hits = storyboard_leak_hits(text)
+    if storyboard_hits:
+        global_warnings.append("Storyboard-generation instructions appear in the user-facing video prompt.")
+    dense_negative_hits = dense_negative_constraint_hits(text)
+    if dense_negative_hits:
+        global_warnings.append("A dense or generic negative-constraint list appears in the video prompt; use positive shot-specific state language instead.")
     passed = not global_warnings and all(item["status_code"] == "PASS" for item in scripts)
     result = {
         "status": "通过" if passed else "警告",
@@ -185,6 +230,8 @@ def main() -> int:
         "banned_term_hits": hits,
         "censor_artifact_hits": censor_hits,
         "forbidden_video_meta_hits": meta_hits,
+        "storyboard_leak_hits": storyboard_hits,
+        "dense_negative_constraint_hits": dense_negative_hits,
     }
     print(json.dumps(result, ensure_ascii=False, indent=2))
     return 0 if passed else 1
