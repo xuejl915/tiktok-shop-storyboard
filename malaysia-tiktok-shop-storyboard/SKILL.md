@@ -31,7 +31,7 @@ Use FFmpeg/FFprobe first for video scanning and contact sheets. Use ImageGen for
 
 ## Creative route
 
-Read [references/creative-15s.md](references/creative-15s.md), [references/storyboard-spec.md](references/storyboard-spec.md), and [references/malaysia-malay.md](references/malaysia-malay.md).
+Read [references/agent-source-of-truth.md](references/agent-source-of-truth.md), [references/creative-15s.md](references/creative-15s.md), [references/storyboard-spec.md](references/storyboard-spec.md), and [references/malaysia-malay.md](references/malaysia-malay.md). The agent source of truth is the required compact contract for all primary-agent, sub-agent, and handoff work on this route.
 
 1. Design three concepts grounded in the real product structure. Between any two concepts, change at least three of: hook, person, scene, use context, primary proof action, camera path, result, or ending.
 2. Default to 15 seconds, 9:16, realistic handheld-phone TikTok style, and Malaysia as the market.
@@ -45,6 +45,8 @@ Read [references/creative-15s.md](references/creative-15s.md), [references/story
 10. Validate the assembled user-facing prompt text through stdin or a temporary internal file with `scripts/validate_delivery.py`; resolve supported warnings, but never deliver the validation file.
 
 Do not output lock cards, line-by-line source-film mappings, internal audit logs, or other strict-mode artifacts in ordinary creative mode. Output only the requested three evolving prompts and three storyboard sheets.
+
+If any part of this route is delegated, include the relevant product evidence plus [references/agent-source-of-truth.md](references/agent-source-of-truth.md) in the handoff. Assign the recipient explicitly to Layer A, B, or C. The integrating agent must reject mixed-layer output before delivery.
 
 ## Strict route
 

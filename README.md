@@ -113,6 +113,10 @@ Storyboard-generation instructions, product-DNA analysis, validation logs, workf
 
 Each 15-second concept uses the timeline `0–2s`, `2–5s`, `5–8s`, `8–11s`, `11–13s`, and `13–15s`.
 
+## Agent data source / Agent 数据源
+
+All primary agents, sub-agents, and handoff agents should use [`references/agent-source-of-truth.md`](malaysia-tiktok-shop-storyboard/references/agent-source-of-truth.md) as the compact execution contract for the ordinary creative route. It records the three-layer firewall, positive prompt-writing rule, storyboard boundary, exact delivery format, validation gate, and delegation requirements. This prevents internal storyboard or QA rules from leaking into the copyable video prompt.
+
 ## Repository structure / 目录结构
 
 ```text
@@ -122,6 +126,7 @@ malaysia-tiktok-shop-storyboard/
 │   └── openai.yaml
 ├── references/
 │   ├── banned-claims-and-no-subtitles.md
+│   ├── agent-source-of-truth.md
 │   ├── creative-15s.md
 │   ├── malaysia-malay.md
 │   ├── product-dna.md
